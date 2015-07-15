@@ -1,0 +1,11 @@
+{
+  "name": "Road Trip Mix Tape App",
+  "description": "App for creating music playlist for road trip",
+  "version": "0.0.1",
+  "repository": {
+    "type": "git",
+    "url": "https://shrnchn@bitbucket.org/shrnchn/road-trip-mix-tape-app.git"
+  },
+  "devDependencies": {
+  }
+}
