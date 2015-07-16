@@ -1,7 +1,6 @@
 
 var gulp = require('gulp');
 
-var addsrc = require('gulp-add-src');
 var autoprefixer = require('gulp-autoprefixer');
 var concat = require('gulp-concat');
 var imagemin = require('gulp-imagemin');

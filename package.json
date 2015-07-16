@@ -1,11 +1,23 @@
 {
-  "name": "Road Trip Mix Tape App",
-  "description": "App for creating music playlist for road trip",
+  "name": "mix-tape-app",
+  "description": "App for creating music playlist for road trips",
   "version": "0.0.1",
   "repository": {
     "type": "git",
     "url": "https://shrnchn@bitbucket.org/shrnchn/road-trip-mix-tape-app.git"
   },
   "devDependencies": {
+    "gulp": "^3.9.0",
+    "gulp-rename": "^1.2.2",
+    "gulp-minify-css": "^1.2.0",
+    "gulp-concat": "^2.6.0",
+    "gulp-watch": "^4.3.2",
+    "gulp-uglify": "^1.2.0",
+    "gulp-jshint": "^1.11.2",
+    "gulp-autoprefixer": "^2.3.1",
+    "gulp-newer": "^0.5.1",
+    "gulp-notify": "^2.2.0",
+    "gulp-sass": "^2.0.4",
+    "gulp-imagemin": "^2.3.0"
   }
 }
