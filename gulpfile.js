@@ -20,7 +20,6 @@ gulp.task('styles', function() {
     .pipe(newer('sass/*.scss')).on('error', errorHandler)
     .pipe(sass({ style: 'expanded' }))
     .pipe(autoprefixer('last 2 version', 'safari 5', 'ie 8', 'ie 9', 'opera 12.1', 'ios 6', 'android 4'))
-    .pipe(gulp.dest('build/css'))
     .pipe(rename({suffix: '.min'}))
     .pipe(minify())
     .pipe(gulp.dest('build/css'))
@@ -29,11 +28,10 @@ gulp.task('styles', function() {
 
 // Lint, Concatenate and Minify JavaScript
 gulp.task('scripts', function() {
-  return gulp.src(['js/lib/jquery.js', 'js/scripts.js'])
+  return gulp.src(['js/jquery-1.11.1.min.js', 'js/scripts.js'])
     .pipe(jshint())
     .pipe(jshint.reporter('default'))
     .pipe(concat('scripts.js'))
-    .pipe(gulp.dest('build/js'))
     .pipe(rename({suffix: '.min'}))
     .pipe(uglify())
     .pipe(gulp.dest('build/js'))
