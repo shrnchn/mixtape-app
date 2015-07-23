@@ -1,7 +1,5 @@
 var app = {};
 
-////////////////// google maps api //////////////////
-
 // set global variables
 var origin;
 var destination;
@@ -14,9 +12,7 @@ var geocoder;
 var map;
 
 var distance;
-var drivingTime;
-var drivingTimeValue;
-
+var time;
 
 app.codeAddress = function(){
 	// reset 
@@ -38,42 +34,44 @@ app.codeAddress = function(){
 			// if is okay, store results in origin
 			if(status == google.maps.GeocoderStatus.OK) {
 				origin = results[0].geometry.location;
-				// console.log(origin);
-				geocoder.geocode({'address': destAddress},function(results, status){
-					if(status == google.maps.GeocoderStatus.OK) {
-						destination = results[0].geometry.location;
-						// if both locations are okay, display map
-						// console.log(destination);
-						if(destination && origin) {
-							app.displayMap();
-							app.showRoute();
-							
-						}
-					} else {
-						console.log('Geocode was not successful for the following reason: ' + status);
-					}
-				});
+				console.log(origin);
 			} else {
 				// fail alert
 				console.log('Geocode was not successful for the following reason: ' + status);
 			}
 		});
 
+		geocoder.geocode({'address': destAddress},function(results, status){
+			if(status == google.maps.GeocoderStatus.OK) {
+				destination = results[0].geometry.location;
+				// if both locations are okay, display map
+				console.log(destination);
+				// app.displayMap();
+				// app.showRoute();
+			} else {
+				console.log('Geocode was not successful for the following reason: ' + status);
+			}
+		});
 
-
-		// reset inputs
-		$('input[name="origin-address"]').val('');
-		$('input[name="destination-address"]').val('');
+		var checker = window.setInterval(function(){
+			if(destination && origin) {
+				app.displayMap();
+				app.showRoute();
+				// stop the checker
+				clearInterval(checker);
+			}
+		},200);
 
 	}
 };
+
 
 // creates and displays map
 app.displayMap = function(){
 
 	// center of the map (calculates mean value between two locations)
 	latlng = new google.maps.LatLng((origin.lat()+destination.lat())/2,(origin.lng()+destination.lng())/2);
-	// console.log('latlng',latlng);
+	console.log('latlng',latlng);
 
 	// map styles
 	var mapStyle = [{"featureType":"administrative","elementType":"labels.text.fill","stylers":[{"color":"#444444"}]},{"featureType":"landscape","elementType":"all","stylers":[{"color":"#f2f2f2"}]},{"featureType":"poi","elementType":"all","stylers":[{"visibility":"off"}]},{"featureType":"road","elementType":"all","stylers":[{"saturation":-100},{"lightness":45}]},{"featureType":"road.highway","elementType":"all","stylers":[{"visibility":"simplified"}]},{"featureType":"road.arterial","elementType":"labels.icon","stylers":[{"visibility":"off"}]},{"featureType":"transit","elementType":"all","stylers":[{"visibility":"off"}]},{"featureType":"water","elementType":"all","stylers":[{"color":"#46bcec"},{"visibility":"on"}]}];
@@ -111,24 +109,14 @@ app.displayMap = function(){
 
 			// distance between two points
 			distance = response.routes[0].legs[0].distance.text;
+			console.log(distance);
 
 			// driving time
-			drivingTime = response.routes[0].legs[0].duration.text;
-
-			// driving time value, no string
-			drivingTimeValue = response.routes[0].legs[0].duration.value;
-
-			console.log(drivingTimeValue, 'seconds');
-
-			drivingTimeValue = drivingTimeValue / 60;
-			console.log(drivingTimeValue, 'mins');
-			var drivingTimeRounded = Math.round(drivingTimeValue);
-			console.log(drivingTimeRounded, 'mins rounded');
+			time = response.routes[0].legs[0].duration.text;
+			console.log(time);
 
 			$('.distance').text('Distance: ' + distance);
-			$('.duration').text('Duration: ' + drivingTime);
-
-			app.estimateNumberSongs(drivingTimeRounded);
+			$('.duration').text('Duration: ' + time);
 		}
 	});
 };
@@ -184,83 +172,12 @@ app.showRoute = function(){
 };
 
 app.init = function(){
-	app.getMusicGenre();
-
 	$('#routes').on('submit', function(e){
 		e.preventDefault();
 		app.codeAddress();
 	});
+		// app.codeAddress();
 };
-
-////////////////// echonest api //////////////////
-
-var genre;
-
-app.getMusicGenre = function(){
-
-	$('input[type="radio"]').on('click', function(e){
-		e.preventDefault();
-	// when button is clicked, store the genre in a variable
-		genre = $(this).data('genre');
-
-		genre = encodeURIComponent(genre);
-		
-		console.log(genre);
-		$(this).css('background', 'red');
-	});
-};
-
-
-app.estimateNumberSongs = function(drivingtime){
-	
-	var numberSongs;
-
-	console.log('yolo', drivingtime);
-	if(drivingtime <= 60) {
-		console.log('play 20 songs');
-
-		numberSongs = 20;
-	}
-
-	console.log('hello', numberSongs);
-	app.createPlaylist(numberSongs);
-};
-
-app.createPlaylist = function(numberSongs){
-
-	var api_key = 'UFGYPYEHNZHWIKORQ';
-	
-	$.ajax({
-		url: 'http://developer.echonest.com/api/v4/playlist/basic?api_key='+api_key+'&genre='+genre+'&format=json&results='+numberSongs+'&type=genre-radio',
-		// url: 'http://developer.echonest.com/api/v4/genre/list?api_key=UFGYPYEHNZHWIKORQ&format=json&results=20',
-		type: 'GET',
-		dataType: 'json',
-		success: function(result){
-			console.log(result.response.songs);
-			app.songs = result.response.songs;
-
-			$.each(result.response.songs,function(i,song){
-				var li = $('<li>').text(song.title);
-				$('.playlist').append(li);
-				console.log(song.title);
-			});
-
-			// console.log(result.response);
-
-			// app.genres = result.response.genres;
-			// $.each(app.genres,function(i,genre){
-			// 	console.log(genre.name);
-			// });
-
-		},
-		error: function(err){
-			console.log(err);
-		}
-	});
-};
-
-
-////////////////// doc ready //////////////////
 
 $(function(){
 	app.init();

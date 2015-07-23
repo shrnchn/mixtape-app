@@ -54,21 +54,22 @@ gulp.task('images', function() {
 
 // Fonts
 gulp.task('fonts', function() {
-    return gulp.src('font/*')
-      .pipe(gulp.dest('build/font'));
+    return gulp.src('fonts/*')
+      .pipe(gulp.dest('build/fonts'));
 });
 
 // Watch 
 gulp.task('watch', function() {
     gulp.watch('js/**/*.js', ['scripts']);
     gulp.watch('sass/**/*.scss', ['styles']);
+    gulp.watch('fonts/*', ['fonts']);
     gulp.watch('img/**/*', ['images']);
 });
 
 
 // Default Task
 gulp.task('default', function() {
-    gulp.start('styles', 'scripts', 'images', 'watch');
+    gulp.start('styles', 'scripts', 'fonts', 'images', 'watch');
 });
 
 // Handle the error

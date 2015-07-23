@@ -1,2 +1,59 @@
-@import "normalize";
-@import "core";
+// @import 'bootstrap/*';
+// @import 'core';
+@import 'bootstrap';
+@import 'normalize';
+
+body {
+	min-height: 100%;
+}
+
+.container {
+	width: 100%;
+}
+
+form {
+
+	input[type="text"] {
+		margin: 5px 0;
+		border: 1px solid black;
+	}
+
+	.go {
+		width: 100px;
+		margin: 50px 0 10px 0;
+	}
+}
+
+.map {
+	background: yellow;
+}
+
+.genres {
+	list-style: none;
+
+	.genre {
+		width: 90px;
+		height: 90px;
+		border-radius: 45px;
+		border: 1px solid green;
+		float: left;
+
+		&:focus {
+			outline: 0;
+		}
+		
+		span {
+			text-align: center;
+			display: block;
+			margin: 30px auto;
+		}
+	}
+}
+
+#mapCanvas {
+	height: 100vh;
+}
+
+.playlist {
+	overflow: scroll;
+}

@@ -6,11 +6,100 @@
 	<link rel="stylesheet" href="build/css/styles.min.css">
 </head>
 <body>
-	<h1>Road Trip Mix Tape</h1>
 
-	<div class="map">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-12">
+
+				<h1>Road Trip Mix Tape</h1>
+				<h3>Enter your locations:</h3>
+				<form id="routes">
+					<label>Start:</label>
+					<input type="text" name="origin-address" id="origin-address">
+
+					<label>End:</label>
+					<input type="text" name="destination-address" id="destination-address">
+
+					<h3>Pick a genre:</h3>
+					<div class="genres">
+						<input type="radio" id="classical" data-genre="classical" class="genre classical">
+							<label for="classical">Classical</label>
+						
+						<input type="radio" id="country" data-genre="country" class="genre country">
+							<label class="genre" for="country">Country</label>
+						
+						<input type="radio" id="dancePop" data-genre="dance pop" class="genre dance-pop">
+							<label class="genre" for="dancePop">Dance Pop</label>
+						
+						<input type="radio" id="folk" data-genre="folk" class="genre folk">
+							<label class="genre" for="folk">Folk</label>
+						
+						<input type="radio" id="hipHop" data-genre="hip hop" class="genre hip-hop">
+							<label class="genre" for="hipHop">Hip Hop</label>
+						
+						<input type="radio" id="kPop" data-genre="k-pop" class="genre k-pop">
+							<label class="genre" for="kPop">K-Pop</label>
+						
+						<input type="radio" id="metal" data-genre="metal" class="genre metal">
+							<label class="genre" for="metal">Metal</label>
+						
+						<input type="radio" id="pop" data-genre="pop" class="genre pop">
+							<label class="genre" for="pop">Pop</label>
+						
+						<input type="radio" id="punk" data-genre="punk" class="genre punk">
+							<label class="genre" for="punk">Punk</label>
+						
+						<input type="radio" id="rnb" data-genre="r&b" class="genre rnb">
+							<label class="genre" for="rnb">R&B</label>
+						
+						<input type="radio" id="rap" data-genre="rap" class="genre rap">
+							<label class="genre" for="rap">Rap</label>
+						
+						<input type="radio" id="rock" data-genre="rock" class="genre rock">
+							<label class="genre" for="rock">Rock</label>
+						
+						<input type="radio" id="trance" data-genre="trance" class="genre trance">
+							<label class="genre" for="trance">Trance</label>
+						
+					</div>
+					
+					<input type="submit" value="Go!" class="go"/>
+				
+				</form>
+				
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-12 map">
+				
+				<h3>Map</h3>
+				<div id="mapCanvas" style="width: 500px; height: 400px;"></div>
+
+				<div class="distance"></div>
+				<div class="duration"></div>
 		
+			</div>
+			<div class="col-md-12">
+				<div class="playlist">
+					
+					<h2>Playlist generated here</h2>
+					<div class="playlist">
+						<ul>
+						</ul>
+					</div> 
+				</div>
+			</div>
+		</div>
+
 	</div>
-	
+
+	<script src="http://maps.googleapis.com/maps/api/js?key=AIzaSyARtLmFPtKBXDqZaHzMsEX67Z3y41APCJ0"></script>
+	<script src="build/js/scripts.min.js"></script>
 </body>
 </html>
+
+
+
+<!-- http://googlegeodevelopers.blogspot.ca/2012/05/google-places-api-search-refinements-as.html -->
+
+<!-- http://googlegeodevelopers.blogspot.co.uk/2012/05/google-places-api-search-refinements-as.html -->
