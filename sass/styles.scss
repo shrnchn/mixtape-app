@@ -28,26 +28,49 @@ form {
 	background: yellow;
 }
 
-.genres {
-	list-style: none;
 
-	.genre {
-		width: 90px;
-		height: 90px;
-		border-radius: 45px;
-		border: 1px solid green;
-		float: left;
+body {
+    font-family:sans-serif;
+}
 
-		&:focus {
-			outline: 0;
-		}
-		
-		span {
-			text-align: center;
-			display: block;
-			margin: 30px auto;
-		}
-	}
+body {
+    font-family:sans-serif;
+}
+
+.genre {
+    margin:4px;
+    float:left;
+
+    label {
+        float:left;
+        width:170px;
+        margin:4px;
+        background-color:#EFEFEF;
+        border-radius:4px;
+        border:1px solid #D0D0D0;
+        overflow:auto;
+
+        &:hover {
+        	background: red;
+        }
+    }
+
+    input {
+        display: none;
+    }
+
+    span {
+        text-align:center;
+        font-size: 32px;
+        padding:13px 0px;
+        display:block;
+    }
+
+    input:checked + span {
+        background-color: #404040;
+        color: #F7F7F7;
+    }
+
 }
 
 #mapCanvas {

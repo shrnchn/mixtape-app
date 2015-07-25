@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Road Trip Mix Tape</title>
+	<link rel="stylesheet" href="build/css/styles.min.css">
+</head>
+<body>
+
+	<div class="container">
+		<div class="row">
+			<div class="col-md-12">
+
+				<h1>Road Trip Mix Tape</h1>
+				<h3>Enter your locations:</h3>
+				<form id="routes">
+					<label>Start:</label>
+					<input type="text" name="origin-address" id="origin-address">
+
+					<label>End:</label>
+					<input type="text" name="destination-address" id="destination-address">
+
+					<h3>Pick a genre:</h3>
+					<div class="genres">
+				
+
+
+
+						<input type="radio" id="classical" data-genre="classical">
+							<label for="classical">Classical</label>
+						
+						<input type="radio" id="country" data-genre="country">
+							<label for="country">Country</label>
+						
+						<input type="radio" id="dancePop" data-genre="dance pop">
+							<label for="dancePop">Dance Pop</label>
+						
+						<input type="radio" id="folk" data-genre="folk">
+							<label for="folk">Folk</label>
+						
+						<input type="radio" id="hipHop" data-genre="hip hop">
+							<label for="hipHop">Hip Hop</label>
+						
+						<input type="radio" id="kPop" data-genre="k-pop">
+							<label for="kPop">K-Pop</label>
+						
+						<input type="radio" id="metal" data-genre="metal">
+							<label for="metal">Metal</label>
+						
+						<input type="radio" id="pop" data-genre="pop">
+							<label for="pop">Pop</label>
+						
+						<input type="radio" id="punk" data-genre="punk">
+							<label for="punk">Punk</label>
+						
+						<input type="radio" id="rap" data-genre="rap">
+							<label for="rap">Rap</label>
+						
+						<input type="radio" id="rock" data-genre="rock">
+							<label for="rock">Rock</label>
+						
+						<input type="radio" id="trance" data-genre="trance">
+							<label for="trance">Trance</label>
+						
+					</div>
+					
+					<input type="submit" value="Go!" class="go"/>
+				
+				</form>
+				
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-12 map">
+				
+				<h3>Map</h3>
+				<div id="mapCanvas" style="width: 500px; height: 400px;"></div>
+
+				<div class="distance"></div>
+				<div class="duration"></div>
+		
+			</div>
+			<div class="col-md-12">
+				<div class="playlist">
+					
+					<h2>Playlist generated here</h2>
+					<div class="playlist">
+						<ul>
+						</ul>
+					</div> 
+				</div>
+			</div>
+		</div>
+
+	</div>
+
+	<script src="http://maps.googleapis.com/maps/api/js?key=AIzaSyARtLmFPtKBXDqZaHzMsEX67Z3y41APCJ0"></script>
+	<script src="build/js/scripts.min.js"></script>
+</body>
+</html>
+
+
+
+<!-- http://googlegeodevelopers.blogspot.ca/2012/05/google-places-api-search-refinements-as.html -->
+
+<!-- http://googlegeodevelopers.blogspot.co.uk/2012/05/google-places-api-search-refinements-as.html -->

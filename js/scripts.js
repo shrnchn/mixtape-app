@@ -198,40 +198,35 @@ var genre;
 
 app.getMusicGenre = function(){
 
-	$('input[type="radio"]').on('click', function(e){
-		e.preventDefault();
+	$('input[type="radio"]').on('click', function(){
 	// when button is clicked, store the genre in a variable
 		genre = $(this).data('genre');
 
 		genre = encodeURIComponent(genre);
-		
+
 		console.log(genre);
-		$(this).css('background', 'red');
+		console.log(this);
 	});
 };
 
 
 app.estimateNumberSongs = function(drivingtime){
 	
-	var numberSongs;
+	var numberOfSongs;
 
-	console.log('yolo', drivingtime);
 	if(drivingtime <= 60) {
-		console.log('play 20 songs');
-
-		numberSongs = 20;
+		numberOfSongs = 15;
 	}
 
-	console.log('hello', numberSongs);
-	app.createPlaylist(numberSongs);
+	app.createPlaylist(numberOfSongs);
 };
 
-app.createPlaylist = function(numberSongs){
+app.createPlaylist = function(numberOfSongs){
 
 	var api_key = 'UFGYPYEHNZHWIKORQ';
 	
 	$.ajax({
-		url: 'http://developer.echonest.com/api/v4/playlist/basic?api_key='+api_key+'&genre='+genre+'&format=json&results='+numberSongs+'&type=genre-radio',
+		url: 'http://developer.echonest.com/api/v4/playlist/basic?api_key='+api_key+'&genre='+genre+'&format=json&results='+numberOfSongs+'&type=genre-radio',
 		// url: 'http://developer.echonest.com/api/v4/genre/list?api_key=UFGYPYEHNZHWIKORQ&format=json&results=20',
 		type: 'GET',
 		dataType: 'json',
