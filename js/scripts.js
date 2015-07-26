@@ -51,12 +51,22 @@ app.codeAddress = function(){
 						} 
 
 					} else {
-						alert('Please enter valid location');
+						swal({   
+							title: "Error!",
+							text: "Please enter a valid location.",
+							type: "error",
+							confirmButtonText: "Cool"
+						});
 					}
 				});
 			} else {
 				// fail alert
-				alert('Please enter valid location');
+				swal({   
+					title: "Error!",
+					text: "Please enter a valid location.",
+					type: "error",
+					confirmButtonText: "Cool"
+				});
 			}
 		});
 
@@ -258,7 +268,12 @@ app.init = function(){
 		e.preventDefault();
 
 		if(genre === undefined) {
-			alert('Please select a genre.');
+			swal({   
+				title: "Error!",
+				text: "Please select a genre.",
+				type: "error",
+				confirmButtonText: "Aight"
+			});
 		} else {
 			app.codeAddress();
 		}
@@ -266,6 +281,7 @@ app.init = function(){
 
 	$('#reset').on('click', function() {
 	    location.reload();
+	    $(window).scrollTop(0);
 	})
 };
 

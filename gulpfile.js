@@ -28,7 +28,7 @@ gulp.task('styles', function() {
 
 // Lint, Concatenate and Minify JavaScript
 gulp.task('scripts', function() {
-  return gulp.src(['js/jquery-1.11.1.min.js', 'js/scripts.js'])
+  return gulp.src(['js/jquery-1.11.1.min.js', 'js/sweetalert.min.js', 'js/scripts.js'])
     .pipe(jshint())
     .pipe(jshint.reporter('default'))
     .pipe(concat('scripts.js'))

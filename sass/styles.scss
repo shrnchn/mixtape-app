@@ -24,6 +24,10 @@ h2 {
 	font-weight: $bold;
 }
 
+label {
+	text-transform: capitalize;
+}
+
 form {
 	margin: 40px auto;
 	
