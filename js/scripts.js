@@ -1,6 +1,5 @@
-var app = {};
-
-////////////////// google maps api //////////////////
+// namespace
+var mixTape = {};
 
 // set global variables
 var origin;
@@ -17,8 +16,15 @@ var distance;
 var drivingTime;
 var drivingTimeValue;
 
+var genre;
 
-app.codeAddress = function(){
+var videoId;
+var videoURL;
+
+mixTape.YTkey = 'AIzaSyC-9taR1ub2rdbKEZkpeNYPrGUBXY-UyQY';
+mixTape.ENkey = 'UFGYPYEHNZHWIKORQ';
+
+mixTape.codeAddress = function(){
 	// reset 
 	origin = null;
 	destination = null;
@@ -44,8 +50,8 @@ app.codeAddress = function(){
 						// if both locations are okay, display map
 						if(destination && origin) {
 							$('section#bottom').css('display','block');
-							app.displayMap();
-							app.showRoute();
+							mixTape.displayMap();
+							mixTape.showRoute();
 							$('input[type="radio"]').attr('checked', false);
 							$("#bottom").get(0).scrollIntoView();
 						} 
@@ -55,7 +61,7 @@ app.codeAddress = function(){
 							title: "Error!",
 							text: "Please enter a valid location.",
 							type: "error",
-							confirmButtonText: "Cool"
+							confirmButtonText: "Got it!"
 						});
 					}
 				});
@@ -65,22 +71,18 @@ app.codeAddress = function(){
 					title: "Error!",
 					text: "Please enter a valid location.",
 					type: "error",
-					confirmButtonText: "Cool"
+					confirmButtonText: "Got it!"
 				});
 			}
 		});
-
-
-
 		// reset inputs
 		$('input[name="origin-address"]').val('');
 		$('input[name="destination-address"]').val('');
-
 	}
 };
 
 // creates and displays map
-app.displayMap = function(){
+mixTape.displayMap = function(){
 
 	// center of the map (calculates mean value between two locations)
 	latlng = new google.maps.LatLng((origin.lat()+destination.lat())/2,(origin.lng()+destination.lng())/2);
@@ -129,23 +131,17 @@ app.displayMap = function(){
 
 			// driving time value, no string
 			drivingTimeValue = response.routes[0].legs[0].duration.value;
-
-			console.log(drivingTimeValue, 'seconds');
-
 			drivingTimeValue = drivingTimeValue / 60;
-			console.log(drivingTimeValue, 'mins');
 			var drivingTimeRounded = Math.round(drivingTimeValue);
-			console.log(drivingTimeRounded, 'mins rounded');
-
 			$('.distance').text(distance);
 			$('.duration').text(drivingTime);
 
-			app.estimateNumberSongs(drivingTimeRounded);
+			mixTape.estimateNumberSongs(drivingTimeRounded);
 		}
 	});
 };
 
-app.showRoute = function(){
+mixTape.showRoute = function(){
 
 	// show route between origin and destination
 	var route = new google.maps.Polyline({
@@ -196,11 +192,7 @@ app.showRoute = function(){
 
 };
 
-////////////////// echonest api //////////////////
-
-var genre;
-
-app.getMusicGenre = function(){
+mixTape.getMusicGenre = function(){
 
 	$('input[type="radio"]').on('click', function(){
 	// when button is clicked, store the genre in a variable
@@ -212,7 +204,7 @@ app.getMusicGenre = function(){
 };
 
 // get number of songs
-app.estimateNumberSongs = function(drivingtime){
+mixTape.estimateNumberSongs = function(drivingtime){
 	
 	var numberOfSongs;
 
@@ -230,28 +222,29 @@ app.estimateNumberSongs = function(drivingtime){
 		numberOfSongs = 250;
 	}
 
-	app.createPlaylist(numberOfSongs);
+	mixTape.createPlaylist(numberOfSongs);
 };
 
-app.createPlaylist = function(numberOfSongs){
-
-	var api_key = 'UFGYPYEHNZHWIKORQ';
+mixTape.createPlaylist = function(numberOfSongs){
 	
 	$.ajax({
-		url: 'http://developer.echonest.com/api/v4/playlist/basic?api_key='+api_key+'&genre='+genre+'&format=json&results='+numberOfSongs+'&type=genre-radio',
+		url: 'http://developer.echonest.com/api/v4/playlist/basic?api_key='+mixTape.ENkey+'&genre='+genre+'&format=json&results='+numberOfSongs+'&type=genre-radio',
 
 		type: 'GET',
 		dataType: 'json',
 		success: function(result){
 			console.log(result);
-			app.songs = result.response.songs;
+			mixTape.songs = result.response.songs;
 
 			$.each(result.response.songs,function(i,song){
+				var youtube = 'https://www.youtube.com/watch?v=';
 				var li = $('<li>').text(song.title + ' by ' + song.artist_name);
 				$('.playlist ol').append(li);
 
+				mixTape.getVideoId(song.title + song.artist_name);
 
-				console.log(song.title + ' by ' + song.artist_name);
+				// $('li').html('<a href="'+youtube+'">'+li);
+
 			});
 
 		},
@@ -261,9 +254,33 @@ app.createPlaylist = function(numberOfSongs){
 	});
 };
 
-app.init = function(){
+mixTape.getVideoId = function(songName){
+	$.ajax({
+		url: "https://www.googleapis.com/youtube/v3/search",
+		type: "GET",
+		data: {
+			v:3,
+			part: "snippet",
+			q: songName,
+			type: "video",
+			maxResults: 1,
+			key: mixTape.YTkey
+		},
+		success: function(result){
+			console.log(result);
+			videoId = result.items[0].id.videoId;
+			console.log(videoId);
+		}
+	});
+};
 
-	var getMusic = app.getMusicGenre();
+mixTape.createVideoLink = function(){
+
+};
+
+mixTape.init = function(){
+
+	var getMusic = mixTape.getMusicGenre();
 
 	$('input[type="button"]').on('click', function(e){
 		e.preventDefault();
@@ -273,22 +290,19 @@ app.init = function(){
 				title: "Error!",
 				text: "Please select a genre.",
 				type: "error",
-				confirmButtonText: "Aight"
+				confirmButtonText: "Got it!"
 			});
 		} else {
-			app.codeAddress();
+			mixTape.codeAddress();
 		}
 	});
 
 	$('#reset').on('click', function() {
 	    location.reload();
 	    $(window).scrollTop(0);
-	})
+	});
 };
 
-
-////////////////// doc ready //////////////////
-
 $(function(){
-	app.init();
+	mixTape.init();
 });
