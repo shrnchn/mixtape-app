@@ -38,24 +38,25 @@ app.codeAddress = function(){
 			// if is okay, store results in origin
 			if(status == google.maps.GeocoderStatus.OK) {
 				origin = results[0].geometry.location;
-				// console.log(origin);
 				geocoder.geocode({'address': destAddress},function(results, status){
 					if(status == google.maps.GeocoderStatus.OK) {
 						destination = results[0].geometry.location;
 						// if both locations are okay, display map
-						// console.log(destination);
 						if(destination && origin) {
+							$('section#bottom').css('display','block');
 							app.displayMap();
 							app.showRoute();
-							
-						}
+							$('input[type="radio"]').attr('checked', false);
+							$("#bottom").get(0).scrollIntoView();
+						} 
+
 					} else {
-						alert('Geocode was not successful for the following reason: ' + status);
+						alert('Please enter valid location');
 					}
 				});
 			} else {
 				// fail alert
-				alert('Geocode was not successful for the following reason: ' + status);
+				alert('Please enter valid location');
 			}
 		});
 
@@ -82,7 +83,8 @@ app.displayMap = function(){
 	var mapOptions = {
 		zoom: 1,
 		center: latlng,
-		styles: mapStyle 
+		styles: mapStyle,
+		scrollwheel: false
 	};
 
 	// creates map object, set map into div
@@ -125,8 +127,8 @@ app.displayMap = function(){
 			var drivingTimeRounded = Math.round(drivingTimeValue);
 			console.log(drivingTimeRounded, 'mins rounded');
 
-			$('.distance').text('Distance: ' + distance);
-			$('.duration').text('Duration: ' + drivingTime);
+			$('.distance').text(distance);
+			$('.duration').text(drivingTime);
 
 			app.estimateNumberSongs(drivingTimeRounded);
 		}
@@ -181,15 +183,7 @@ app.showRoute = function(){
 	 destWindow.setContent(destInfo);
 	 destWindow.open(map, destMarker);
 	});
-};
 
-app.init = function(){
-	app.getMusicGenre();
-
-	$('#routes').on('submit', function(e){
-		e.preventDefault();
-		app.codeAddress();
-	});
 };
 
 ////////////////// echonest api //////////////////
@@ -201,12 +195,8 @@ app.getMusicGenre = function(){
 	$('input[type="radio"]').on('click', function(){
 	// when button is clicked, store the genre in a variable
 		genre = $(this).data('genre');
-
 		// encode genres with multiple words
 		genre = encodeURIComponent(genre);
-
-		console.log(genre);
-		console.log(this);
 	});
 };
 
@@ -215,7 +205,7 @@ app.estimateNumberSongs = function(drivingtime){
 	
 	var numberOfSongs;
 
-	if(drivingtime >= 5 && drivingtime <= 60) {
+	if(drivingtime >= 0.5 && drivingtime <= 60) {
 		numberOfSongs = 15;
 	} else if(drivingtime >= 61 && drivingtime <= 120) {
 		numberOfSongs = 30;
@@ -248,6 +238,8 @@ app.createPlaylist = function(numberOfSongs){
 			$.each(result.response.songs,function(i,song){
 				var li = $('<li>').text(song.title + ' by ' + song.artist_name);
 				$('.playlist ol').append(li);
+
+
 				console.log(song.title + ' by ' + song.artist_name);
 			});
 
@@ -256,6 +248,25 @@ app.createPlaylist = function(numberOfSongs){
 			console.log(err);
 		}
 	});
+};
+
+app.init = function(){
+
+	var getMusic = app.getMusicGenre();
+
+	$('input[type="button"]').on('click', function(e){
+		e.preventDefault();
+
+		if(genre === undefined) {
+			alert('Please select a genre.');
+		} else {
+			app.codeAddress();
+		}
+	});
+
+	$('#reset').on('click', function() {
+	    location.reload();
+	})
 };
 
 

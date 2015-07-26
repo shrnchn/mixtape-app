@@ -1,8 +1,11 @@
-// @import 'bootstrap/*';
-// @import 'core';
+
 @import "bootstrap";
 @import "core";
 @import "normalize";
+
+a {
+	color: white;
+}
 
 h1 {
     margin: 40px auto 20px auto;
@@ -18,7 +21,7 @@ h1 {
 
 h2 {
 	margin: 30px auto;
-	font-weight: $light;
+	font-weight: $bold;
 }
 
 form {
@@ -37,6 +40,7 @@ form {
 			background: none;
 			padding: 10px;
 			width: 100%;
+			text-transform: capitalize;
 
 			&:focus {
 				outline: 0;
@@ -44,16 +48,24 @@ form {
 	    }
 	}
     
-	input[type="submit"] {
-		width: 200px;
+	input[type="button"]{
+		width: 125px;
 		background: none;
 		padding: 10px;
 		border: 1px solid white;
+
+		&:hover {
+			background: rgba(255, 255, 255, 0.5);
+		}
+
+		&:focus {
+			outline: 0;
+		}
 	}
 }
 
 .genre {
-    margin: 20px auto 40px auto;
+    margin: 20px auto 50px auto;
 
     label {
         width: 100px;
@@ -84,15 +96,75 @@ form {
     }
     input:checked + span {
         font-weight: $extrabold;
+        color: $teal;
     }
 }
 
-#mapCanvas {
-    height: 100vh;
+section {
+	margin: 0 auto 100px auto;
+
+	&#bottom {
+		display: none;
+		text-align: left;
+
+		h3 {
+			text-align: center;
+		}
+
+		 button {
+		 	display: block;
+		 	margin: 30px auto;
+			background: none;
+			padding: 10px;
+			border: 1px solid white;
+			float: right;
+
+			&:hover {
+				background: rgba(255, 255, 255, 0.5);
+			}
+
+			&:focus {
+				outline: 0;
+			}
+		}
+	}
+}
+
+.map {
+	.details {
+		text-align: center;
+		margin: 10px auto;
+	}
+	span {
+		margin: 0 5px;
+	}
+	#mapCanvas {
+		width: 100%;
+	    height: 100vh;
+
+	    .gm-style {
+	    	color: black;
+	    	text-transform: capitalize;
+	    }
+	}
+	
 }
 
 .playlist {
-    overflow: scroll;
+	height: 482px;
+    overflow-y: auto;
+
+    ol {
+    	text-align: left;
+    	margin: 30px auto;
+
+    	li {
+    		margin: 5px auto;
+    	}
+    }
 }
 
-.map {}
+footer {
+	margin: 40px auto;
+	font-size: 0.75rem;
+}
