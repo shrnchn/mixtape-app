@@ -50,12 +50,12 @@ app.codeAddress = function(){
 							
 						}
 					} else {
-						console.log('Geocode was not successful for the following reason: ' + status);
+						alert('Geocode was not successful for the following reason: ' + status);
 					}
 				});
 			} else {
 				// fail alert
-				console.log('Geocode was not successful for the following reason: ' + status);
+				alert('Geocode was not successful for the following reason: ' + status);
 			}
 		});
 
@@ -202,6 +202,7 @@ app.getMusicGenre = function(){
 	// when button is clicked, store the genre in a variable
 		genre = $(this).data('genre');
 
+		// encode genres with multiple words
 		genre = encodeURIComponent(genre);
 
 		console.log(genre);
@@ -209,13 +210,23 @@ app.getMusicGenre = function(){
 	});
 };
 
-
+// get number of songs
 app.estimateNumberSongs = function(drivingtime){
 	
 	var numberOfSongs;
 
-	if(drivingtime <= 60) {
+	if(drivingtime >= 5 && drivingtime <= 60) {
 		numberOfSongs = 15;
+	} else if(drivingtime >= 61 && drivingtime <= 120) {
+		numberOfSongs = 30;
+	} else if(drivingtime >= 121 && drivingtime <= 240) {
+		numberOfSongs = 60;
+	} else if(drivingtime >= 241 && drivingtime <= 360) {
+		numberOfSongs = 90;
+	} else if(drivingtime >= 361 && drivingtime <= 480) {
+		numberOfSongs = 120;
+	} else {
+		numberOfSongs = 250;
 	}
 
 	app.createPlaylist(numberOfSongs);
@@ -227,25 +238,18 @@ app.createPlaylist = function(numberOfSongs){
 	
 	$.ajax({
 		url: 'http://developer.echonest.com/api/v4/playlist/basic?api_key='+api_key+'&genre='+genre+'&format=json&results='+numberOfSongs+'&type=genre-radio',
-		// url: 'http://developer.echonest.com/api/v4/genre/list?api_key=UFGYPYEHNZHWIKORQ&format=json&results=20',
+
 		type: 'GET',
 		dataType: 'json',
 		success: function(result){
-			console.log(result.response.songs);
+			console.log(result);
 			app.songs = result.response.songs;
 
 			$.each(result.response.songs,function(i,song){
-				var li = $('<li>').text(song.title);
-				$('.playlist').append(li);
-				console.log(song.title);
+				var li = $('<li>').text(song.title + ' by ' + song.artist_name);
+				$('.playlist ol').append(li);
+				console.log(song.title + ' by ' + song.artist_name);
 			});
-
-			// console.log(result.response);
-
-			// app.genres = result.response.genres;
-			// $.each(app.genres,function(i,genre){
-			// 	console.log(genre.name);
-			// });
 
 		},
 		error: function(err){

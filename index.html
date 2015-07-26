@@ -1,104 +1,110 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-	<meta charset="UTF-8">
-	<title>Road Trip Mix Tape</title>
-	<link rel="stylesheet" href="build/css/styles.min.css">
-</head>
-<body>
-
-	<div class="container">
-		<div class="row">
-			<div class="col-md-12">
-
-				<h1>Road Trip Mix Tape</h1>
-				<h3>Enter your locations:</h3>
-				<form id="routes">
-					<label>Start:</label>
-					<input type="text" name="origin-address" id="origin-address">
-
-					<label>End:</label>
-					<input type="text" name="destination-address" id="destination-address">
-
-					<h3>Pick a genre:</h3>
-
-					<div class="genre">
-					    <label>
-					    <input type="radio" name="toggle" id="classical" data-genre="classical">
-					    <span>Classical</span>
-					    </label>
-
-					    <label>
-					    <input type="radio" name="toggle" id="country" data-genre="country"><span>Country</span></label>
-
-					    <label for="dance-pop">
-					    <input type="radio" name="toggle" id="dance-pop" data-genre="dance-pop"><span>Dance Pop</span></label>
-
-					    <label for="folk">
-					    <input type="radio" name="toggle" id="folk" data-genre="folk"><span>Folk</span></label>
-
-					    <label for="hip-hop">
-					    <input type="radio" name="toggle" id="hip-hop" data-genre="hip-hop"><span>Hip Hop</span></label>
-
-					    <label for="k-pop">
-					    <input type="radio" name="toggle" id="k-pop" data-genre="k-pop"><span>K-Pop</span></label>
-
-					    <label for="metal">
-					    <input type="radio" name="toggle" id="metal" data-genre="metal"><span>Metal</span></label>
-
-					    <label for="pop">
-					    <input type="radio" name="toggle" id="pop" data-genre="pop"><span>Pop</span></label>
-
-					    <label for="punk">
-					    <input type="radio" name="toggle" id="punk" data-genre="punk"><span>Punk</span></label>
-
-					    <label for="rap">
-					    <input type="radio" name="toggle" id="rap" data-genre="rap"><span>Rap</span></label>
-
-					    <label for="rock">
-					    <input type="radio" name="toggle" id="rock" data-genre="rock"><span>Rock</span></label>
-
-					    <label for="trance">
-					    <input type="radio" name="toggle" id="trance" data-genre="trance"><span>Trance</span></label>
+	<head>
+		<meta charset="UTF-8">
+		<title>Road Trip Mix Tape</title>
+		<link rel="stylesheet" href="build/css/styles.min.css">
+	</head>
+	<body>
+		<div class="container-fluid">
+			<section id="top" class="clearfix">
+				<div class="row">
+					<div class="col-md-12">
+						<h1>Road Trip Mix Tape</h1>
+					</div>
+				</div>
+						
+				<form id="routes" class="form-inline">
+					<div class="row">
+						<div class="col-md-2"></div>
+						<div class="col-md-8">
+							<div class="form-group">
+								<label>Starting location:</label>
+								<input type="text" name="origin-address" id="origin-address">
+							</div>
+							<div class="form-group">
+								<label>Ending location:</label>
+								<input type="text" name="destination-address" id="destination-address">
+							</div>
+						</div>
+						<div class="col-md-2"></div>
 					</div>
 					
-					<input type="submit" value="Go!" class="go"/>
+					<div class="row">
+						<div class="col-md-12 genre">
+							<h2>Pick a genre</h2>
+							<label for="classical">
+								<input type="radio" name="toggle" id="classical" data-genre="classical">
+								<span>Classical</span>
+							</label>
+							<label for="country">
+								<input type="radio" name="toggle" id="country" data-genre="country">
+								<span>Country</span>
+							</label>
+							<label for="dance-pop">
+								<input type="radio" name="toggle" id="dance-pop" data-genre="dance pop">
+								<span>Dance Pop</span>
+							</label>
+							<label for="folk">
+								<input type="radio" name="toggle" id="folk" data-genre="folk">
+								<span>Folk</span>
+							</label>
+							<label for="hip-hop">
+								<input type="radio" name="toggle" id="hip-hop" data-genre="hip hop">
+								<span>Hip Hop</span>
+							</label>
+							<label for="k-pop">
+								<input type="radio" name="toggle" id="k-pop" data-genre="k-pop">
+								<span>K-Pop</span>
+							</label>
+							<label for="metal">
+								<input type="radio" name="toggle" id="metal" data-genre="metal">
+								<span>Metal</span>
+							</label>
+							<label for="pop">
+								<input type="radio" name="toggle" id="pop" data-genre="pop">
+								<span>Pop</span>
+							</label>
+							<label for="rock">
+								<input type="radio" name="toggle" id="rock" data-genre="rock">
+								<span>Rock</span>
+							</label>
+						</div>
+					</div>
+					
+					<div class="row">
+						<div class="col-md-12">
+							<input type="submit" value="Let's Go!" class="go"/>
+						</div>
+					</div>
 				
 				</form>
-				
-			</div>
-		</div>
-		<div class="row">
-			<div class="col-md-12 map">
-				
-				<h3>Map</h3>
-				<div id="mapCanvas" style="width: 500px; height: 400px;"></div>
+			</section>
 
-				<div class="distance"></div>
-				<div class="duration"></div>
-		
-			</div>
-			<div class="col-md-12">
-				<div class="playlist">
-					
-					<h2>Playlist generated here</h2>
-					<div class="playlist">
-						<ul>
-						</ul>
-					</div> 
+			<section id="bottom">
+				<div class="row">
+					<div class="col-md-6 map">
+						<h3>Map</h3>
+						<div id="mapCanvas" style="width: 500px; height: 400px;"></div>
+						<div class="distance"></div>
+						<div class="duration"></div>
+						
+					</div>
+					<div class="col-md-6">
+						<div class="playlist">
+							<h2>Playlist generated here</h2>
+							<div class="playlist">
+								<ol>
+								</ol>
+							</div>
+						</div>
+					</div>
 				</div>
-			</div>
+			</section>
 		</div>
-
-	</div>
-
 	<script src="http://maps.googleapis.com/maps/api/js?key=AIzaSyARtLmFPtKBXDqZaHzMsEX67Z3y41APCJ0"></script>
 	<script src="build/js/scripts.min.js"></script>
 </body>
 </html>
-
-
-
 <!-- http://googlegeodevelopers.blogspot.ca/2012/05/google-places-api-search-refinements-as.html -->
-
 <!-- http://googlegeodevelopers.blogspot.co.uk/2012/05/google-places-api-search-refinements-as.html -->

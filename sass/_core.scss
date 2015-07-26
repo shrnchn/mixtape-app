@@ -1,13 +1,11 @@
 // Typography
 
-@import url(http://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic|Open+Sans:700,600,400|Open+Sans+Condensed:700);
+@import url(http://fonts.googleapis.com/css?family=Open+Sans:300,400,800);
 
-$lora: 'Lora', serif;
 $opensans: 'Open Sans', sans-serif;
-$opensanscon: 'Open Sans Condensed', sans-serif;
+$light: 300;
 $normal: 400;
-$semibold: 600;
-$bold: 700;
+$extrabold: 800;
 
 // Colours
 
@@ -17,26 +15,3 @@ $gray: #A7A9AC;
 $gray-dark: #58595B;
 $coral: #e74c3c;
 $black: #231F20;
-
-
-@mixin opensans {
-	font-family: $opensans;
-	font-weight: $bold;
-	letter-spacing: .25px;
-}
-
-@mixin opensanscondensed {
-	font-family: $opensanscon;
-	font-weight: $bold;
-	letter-spacing: 1px;
-}
-
-@mixin lora {
-	font-family: $lora;
-	font-weight: $normal;
-}
-
-@mixin border {
-	padding: 0 0 30px 0;
-	border-bottom: 1px $black solid;
-}
