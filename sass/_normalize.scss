@@ -36,3 +36,9 @@ html, body {
 	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00ffff', endColorstr='#ff00ff',GradientType=0 ); /* ie6-9 */
 }
 
+::selection {
+  background: $teal; 
+}
+::-moz-selection {
+  background: $teal;
+}

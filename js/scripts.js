@@ -170,8 +170,8 @@ app.showRoute = function(){
 	});
 
 	// creates info windows for origin and destination
-	var orgInfo = 'Origin: '+ orgAddress;
-	var destInfo = 'Destination: ' + destAddress;
+	var orgInfo = 'Start: '+ orgAddress;
+	var destInfo = 'End: ' + destAddress;
 
 	var orgWindow = new google.maps.InfoWindow({
 		content: orgInfo
@@ -205,6 +205,7 @@ app.getMusicGenre = function(){
 	$('input[type="radio"]').on('click', function(){
 	// when button is clicked, store the genre in a variable
 		genre = $(this).data('genre');
+		$('.genre-name').text(genre);
 		// encode genres with multiple words
 		genre = encodeURIComponent(genre);
 	});
@@ -215,7 +216,7 @@ app.estimateNumberSongs = function(drivingtime){
 	
 	var numberOfSongs;
 
-	if(drivingtime >= 0.5 && drivingtime <= 60) {
+	if(drivingtime = 0 || drivingtime <= 60) {
 		numberOfSongs = 15;
 	} else if(drivingtime >= 61 && drivingtime <= 120) {
 		numberOfSongs = 30;

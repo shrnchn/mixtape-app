@@ -7,16 +7,26 @@ a {
 	color: white;
 }
 
-h1 {
+.heading {
     margin: 40px auto 20px auto;
-    text-transform: uppercase;
-    font-weight: $extrabold;
-    font-size: 5rem;
-    text-align: center;
-    background: url(../img/bg.jpg) 50% 50%;
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: rgba(0, 0, 0, 0);
+    color: white;
+      -webkit-text-fill-color: transparent;
+      background: -webkit-linear-gradient(transparent, transparent),
+                 url(../img/bg.jpg) 50% 50% no-repeat;
+      background: -o-linear-gradient(transparent, transparent);
+      -webkit-background-clip: text;
+}
+
+.heading {
+  text-transform: uppercase;
+  font-weight: $extrabold;
+  font-size: 5rem;
+  text-align: center;
+}
+
+svg {
+  height: 8em;
+  width: 100%;
 }
 
 h2 {
@@ -46,8 +56,9 @@ form {
 			width: 100%;
 			text-transform: capitalize;
 
-			&:focus {
+			&:hover, &:focus {
 				outline: 0;
+				border: 1px solid $teal;
 			}
 	    }
 	}
@@ -57,6 +68,7 @@ form {
 		background: none;
 		padding: 10px;
 		border: 1px solid white;
+		transition: all .15s;
 
 		&:hover {
 			background: rgba(255, 255, 255, 0.5);
@@ -78,11 +90,12 @@ form {
         border-radius: 50px;
         border: 1px solid white;
         font-weight: $normal;
-        transition: all .2s ease-in-out;
+        transition: all .15s ease-in-out;
         &:hover {
             background: rgba(255, 255, 255, 0.5);
             transform: scale(1.15);
             cursor: pointer;
+            border: 2px solid $teal;
         }
         &:active {
         	background: rgba(78, 255, 252, 0.5);
@@ -113,6 +126,10 @@ section {
 
 		h3 {
 			text-align: center;
+
+			span {
+				text-transform: capitalize;
+			}
 		}
 
 		 button {
@@ -122,6 +139,7 @@ section {
 			padding: 10px;
 			border: 1px solid white;
 			float: right;
+			transition: all .15s;
 
 			&:hover {
 				background: rgba(255, 255, 255, 0.5);
