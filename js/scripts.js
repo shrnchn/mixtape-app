@@ -258,7 +258,6 @@ mixTape.createPlaylist = function(numberOfSongs){
 // get video ID to pass into youtube URL
 mixTape.getVideoId = function(songName, li){
 
-
 	$.ajax({
 		url: "https://www.googleapis.com/youtube/v3/search",
 		type: "GET",
@@ -271,6 +270,7 @@ mixTape.getVideoId = function(songName, li){
 		},
 		success: function(result){
 			if(!result.items[0]) {
+				$(li).append(" - No video sorry!");
 				return; // skip it! 
 			}
 
@@ -302,6 +302,7 @@ mixTape.init = function(){
 				confirmButtonText: "Got it!"
 			});
 		} else {
+			$('.playlist ol').empty();
 			mixTape.codeAddress();
 		}
 	});
