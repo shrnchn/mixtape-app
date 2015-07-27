@@ -133,6 +133,9 @@ mixTape.displayMap = function(){
 			drivingTimeValue = response.routes[0].legs[0].duration.value;
 			drivingTimeValue = drivingTimeValue / 60;
 			var drivingTimeRounded = Math.round(drivingTimeValue);
+
+			console.log(drivingTimeRounded);
+
 			$('.distance').text(distance);
 			$('.duration').text(drivingTime);
 
@@ -210,13 +213,13 @@ mixTape.estimateNumberSongs = function(drivingtime){
 
 	if(drivingtime = 0 || drivingtime <= 60) {
 		numberOfSongs = 15;
-	} else if(drivingtime >= 61 && drivingtime <= 120) {
+	} else if(drivingtime >= 60 || drivingtime <= 120) {
 		numberOfSongs = 30;
-	} else if(drivingtime >= 121 && drivingtime <= 240) {
+	} else if(drivingtime >= 120 || drivingtime <= 240) {
 		numberOfSongs = 60;
-	} else if(drivingtime >= 241 && drivingtime <= 360) {
+	} else if(drivingtime >= 240 || drivingtime <= 360) {
 		numberOfSongs = 90;
-	} else if(drivingtime >= 361 && drivingtime <= 480) {
+	} else if(drivingtime >= 360 || drivingtime <= 480) {
 		numberOfSongs = 120;
 	} else {
 		numberOfSongs = 250;
@@ -233,7 +236,7 @@ mixTape.createPlaylist = function(numberOfSongs){
 		type: 'GET',
 		dataType: 'json',
 		success: function(result){
-			console.log(result);
+			// console.log(result);
 			mixTape.songs = result.response.songs;
 
 			$.each(result.response.songs,function(i,song){
@@ -244,7 +247,6 @@ mixTape.createPlaylist = function(numberOfSongs){
 
 				mixTape.getVideoId(song.title + song.artist_name, li);
 
-				// $('li').html('<a href="'+videoURL+'">');
 			});
 		},
 		error: function(err){
@@ -261,7 +263,6 @@ mixTape.getVideoId = function(songName, li){
 		url: "https://www.googleapis.com/youtube/v3/search",
 		type: "GET",
 		data: {
-			v:3,
 			part: "snippet",
 			q: songName,
 			type: "video",
@@ -272,9 +273,9 @@ mixTape.getVideoId = function(songName, li){
 			if(!result.items[0]) {
 				return; // skip it! 
 			}
-			
+
 			videoId = result.items[0].id.videoId;
-			console.log(videoId);
+			// console.log(videoId);
 
 			var videoURL = 'https://www.youtube.com/watch?v=' + videoId;
 			
