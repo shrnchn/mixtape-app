@@ -226,7 +226,7 @@ mixTape.estimateNumberSongs = function(drivingtime){
 };
 
 mixTape.createPlaylist = function(numberOfSongs){
-	
+
 	$.ajax({
 		url: 'http://developer.echonest.com/api/v4/playlist/basic?api_key='+mixTape.ENkey+'&genre='+genre+'&format=json&results='+numberOfSongs+'&type=genre-radio',
 
@@ -237,16 +237,15 @@ mixTape.createPlaylist = function(numberOfSongs){
 			mixTape.songs = result.response.songs;
 
 			$.each(result.response.songs,function(i,song){
-				var youtube = 'https://www.youtube.com/watch?v=';
-				var li = $('<li>').text(song.title + ' by ' + song.artist_name);
+				var a = $('<a>').text(song.title + ' by ' + song.artist_name);
+				var li = $('<li>').append(a);
+
 				$('.playlist ol').append(li);
 
-				mixTape.getVideoId(song.title + song.artist_name);
+				mixTape.getVideoId(song.title + song.artist_name, li);
 
-				// $('li').html('<a href="'+youtube+'">'+li);
-
+				// $('li').html('<a href="'+videoURL+'">');
 			});
-
 		},
 		error: function(err){
 			console.log(err);
@@ -254,7 +253,10 @@ mixTape.createPlaylist = function(numberOfSongs){
 	});
 };
 
-mixTape.getVideoId = function(songName){
+// get video ID to pass into youtube URL
+mixTape.getVideoId = function(songName, li){
+
+
 	$.ajax({
 		url: "https://www.googleapis.com/youtube/v3/search",
 		type: "GET",
@@ -267,15 +269,21 @@ mixTape.getVideoId = function(songName){
 			key: mixTape.YTkey
 		},
 		success: function(result){
-			console.log(result);
+			if(!result.items[0]) {
+				return; // skip it! 
+			}
+			
 			videoId = result.items[0].id.videoId;
 			console.log(videoId);
+
+			var videoURL = 'https://www.youtube.com/watch?v=' + videoId;
+			
+			$(li).find('a').attr({
+				'href' : videoURL,
+				target : '_blank'
+			});
 		}
 	});
-};
-
-mixTape.createVideoLink = function(){
-
 };
 
 mixTape.init = function(){
