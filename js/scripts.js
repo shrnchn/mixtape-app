@@ -272,7 +272,9 @@ mixTape.getVideoId = function(songName, li){
 		},
 		success: function(result){
 			if(!result.items[0]) {
-				$(li).append(" - No video sorry!");
+				var noVidMsg = " - No video sorry!";
+
+				$(li).append('<span class="noVidMsg">'+noVidMsg+'</span>');
 				return; // skip it! 
 			}
 
@@ -283,7 +285,8 @@ mixTape.getVideoId = function(songName, li){
 			
 			$(li).find('a').attr({
 				'href' : videoURL,
-				target : '_blank'
+				target : '_blank',
+				'class': 'slide-left-right'
 			});
 		}
 	});
