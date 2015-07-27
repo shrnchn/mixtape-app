@@ -136,6 +136,8 @@ mixTape.displayMap = function(){
 
 			console.log(drivingTimeRounded);
 
+			$('.from').text(orgAddress);
+			$('.to').text(destAddress);
 			$('.distance').text(distance);
 			$('.duration').text(drivingTime);
 

@@ -1,92 +1,87 @@
-
 @import "bootstrap";
 @import "core";
 @import "normalize";
 
 a {
-	color: white;
+    color: white;
 }
 
 p {
-	text-align: center;
+    text-align: center;
 }
 
 .heading {
     margin: 40px auto 20px auto;
     color: white;
-      -webkit-text-fill-color: transparent;
-      background: -webkit-linear-gradient(transparent, transparent),
-                 url(../img/bg.jpg) 50% 50% no-repeat;
-      background: -o-linear-gradient(transparent, transparent);
-      -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background: -webkit-linear-gradient(transparent, transparent), url(../img/bg.jpg) 50% 50% no-repeat;
+    background: -o-linear-gradient(transparent, transparent);
+    -webkit-background-clip: text;
 }
 
 .heading {
-  text-transform: uppercase;
-  font-weight: $extrabold;
-  font-size: 5rem;
-  text-align: center;
+    text-transform: uppercase;
+    font-weight: $extrabold;
+    font-size: 5rem;
+    text-align: center;
 }
 
 svg {
-  height: 8em;
-  width: 100%;
+    height: 8em;
+    width: 100%;
 }
 
 h2 {
-	margin: 30px auto;
-	font-weight: $bold;
+    margin: 30px auto;
+    font-weight: $bold;
+}
+
+h3 {
+    font-weight: $bold;
 }
 
 label {
-	text-transform: capitalize;
+    text-transform: capitalize;
 }
 
 form {
-	margin: 40px auto;
-	
-	.form-group {
-		margin: 10px 5px;
-		text-align: left;
-	
-		label {
-			text-align: left;
-			font-weight: $normal;
-		} 
-	    input[type="text"] {
-			border: 1px solid white;
-			background: none;
-			padding: 10px;
-			width: 100%;
-			text-transform: capitalize;
-
-			&:hover, &:focus {
-				outline: 0;
-				border: 1px solid $teal;
-			}
-	    }
-	}
-    
-	input[type="button"]{
-		width: 125px;
-		background: none;
-		padding: 10px;
-		border: 1px solid white;
-		transition: all .15s;
-
-		&:hover {
-			background: rgba(255, 255, 255, 0.5);
-		}
-
-		&:focus {
-			outline: 0;
-		}
-	}
+    margin: 40px auto;
+    .form-group {
+        margin: 10px 5px;
+        text-align: left;
+        label {
+            text-align: left;
+            font-weight: $normal;
+        }
+        input[type="text"] {
+            border: 1px solid white;
+            background: none;
+            padding: 10px;
+            width: 100%;
+            text-transform: capitalize;
+            &:hover, &:focus {
+                outline: 0;
+                border: 1px solid $teal;
+            }
+        }
+    }
+    input[type="button"] {
+        width: 125px;
+        background: none;
+        padding: 10px;
+        border: 1px solid white;
+        transition: all .15s;
+        &:hover {
+            background: rgba(255, 255, 255, 0.5);
+        }
+        &:focus {
+            outline: 0;
+        }
+    }
 }
 
 .genre {
     margin: 20px auto 50px auto;
-
     label {
         width: 100px;
         height: 100px;
@@ -102,7 +97,7 @@ form {
             border: 2px solid $teal;
         }
         &:active {
-        	background: rgba(78, 255, 252, 0.5);
+            background: rgba(78, 255, 252, 0.5);
         }
     }
     input {
@@ -122,77 +117,70 @@ form {
 }
 
 section {
-	margin: 0 auto 100px auto;
-
-	&#bottom {
-		display: none;
-		text-align: left;
-
-		h3 {
-			text-align: center;
-
-			span {
-				text-transform: capitalize;
-			}
-		}
-
-		 button {
-		 	display: block;
-		 	margin: 30px auto;
-			background: none;
-			padding: 10px;
-			border: 1px solid white;
-			float: right;
-			transition: all .15s;
-
-			&:hover {
-				background: rgba(255, 255, 255, 0.5);
-			}
-
-			&:focus {
-				outline: 0;
-			}
-		}
-	}
+    margin: 0 auto 100px auto;
+    &#bottom {
+        display: none;
+        text-align: left;
+        h3 {
+            text-align: center;
+            span {
+                text-transform: capitalize;
+            }
+        }
+        button {
+            display: block;
+            margin: 30px auto;
+            background: none;
+            padding: 10px;
+            border: 1px solid white;
+            float: right;
+            transition: all .15s;
+            &:hover {
+                background: rgba(255, 255, 255, 0.5);
+            }
+            &:focus {
+                outline: 0;
+            }
+        }
+    }
 }
 
 .map {
-	.details {
-		text-align: center;
-		margin: 10px auto;
-	}
-	span {
-		margin: 0 5px;
-	}
-	#mapCanvas {
-		margin: 20px auto;
-		width: 100%;
-	    height: 100vh;
-
-	    .gm-style {
-	    	color: black;
-	    	text-transform: capitalize;
-	    }
-	}
-	
+    .details {
+        text-align: center;
+        margin: 10px auto;
+    }
+    .location {
+        text-transform: capitalize;
+    }
+    span {
+        margin: 0 2.5px;
+    }
+    #mapCanvas {
+        margin: 20px auto;
+        width: 100%;
+        height: 100vh;
+        .gm-style {
+            color: black;
+            text-transform: capitalize;
+        }
+    }
 }
 
 .playlist {
-	height: 482px;
+    height: 490px;
     overflow-y: auto;
-    margin: 20px auto;
-
+    margin: 40px auto;
     ol {
-    	text-align: left;
-    	margin: 0 auto;
-
-    	li {
-    		margin: 5px auto;
-    	}
+        text-align: left;
+        margin: 0 auto;
+        li {
+            margin: 5px auto;
+        }
     }
 }
 
 footer {
-	margin: 40px auto;
-	font-size: 0.75rem;
+    margin: 40px auto;
+    font-size: 0.75rem;
 }
