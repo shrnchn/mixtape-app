@@ -222,18 +222,18 @@ mixtape.getMusicGenre = function(){
 
 // get number of songs
 mixtape.estimateNumberSongs = function(drivingtime){
-	
+
 	var numberOfSongs;
 
-	if(drivingtime = 0 || drivingtime <= 60) {
+	if(drivingtime >= 0 && drivingtime <= 60) {
 		numberOfSongs = 15;
-	} else if(drivingtime >= 60 || drivingtime <= 120) {
+	} else if(drivingtime >= 60 && drivingtime <= 120) {
 		numberOfSongs = 30;
-	} else if(drivingtime >= 120 || drivingtime <= 240) {
+	} else if(drivingtime >= 120 && drivingtime <= 240) {
 		numberOfSongs = 60;
-	} else if(drivingtime >= 240 || drivingtime <= 360) {
+	} else if(drivingtime >= 240 && drivingtime <= 360) {
 		numberOfSongs = 90;
-	} else if(drivingtime >= 360 || drivingtime <= 480) {
+	} else if(drivingtime >= 360 && drivingtime <= 480) {
 		numberOfSongs = 120;
 	} else {
 		numberOfSongs = 250;
