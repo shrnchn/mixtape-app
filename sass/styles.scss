@@ -129,11 +129,10 @@ section {
         }
         button {
             display: block;
-            margin: 30px auto;
+            margin: 10px auto;
             background: none;
             padding: 10px;
             border: 1px solid white;
-            float: right;
             transition: all .15s;
             &:hover {
                 background: rgba(255, 255, 255, 0.5);
@@ -210,27 +209,9 @@ footer {
     font-size: 0.75rem;
 }
 
-@media(max-width: 992px) {
-	section {
-		&#bottom{
-			button {
-			float: none;
-			}
-		}
-	}
-}
-
 @media(max-width: 480px) {
 	section {
 		margin: 0 auto 30px auto;
-	}
-
-	section {
-		&#bottom{
-			button {
-			float: none;
-			}
-		}
 	}
 	.heading {
 		font-size: 4rem;

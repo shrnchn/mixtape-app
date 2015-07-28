@@ -146,7 +146,7 @@ mixtape.displayMap = function(){
 		} else {
 			swal({   
 				title: "Error!",
-				text: "No route found. Try again.",
+				text: "This is not a drivable route, please try again.",
 				type: "error",
 				confirmButtonText: "Got it!"
 			}, function(){
