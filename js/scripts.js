@@ -1,5 +1,5 @@
 // namespace
-var mixTape = {};
+var mixtape = {};
 
 // set global variables
 var origin;
@@ -21,10 +21,10 @@ var genre;
 var videoId;
 var videoURL;
 
-mixTape.YTkey = 'AIzaSyC-9taR1ub2rdbKEZkpeNYPrGUBXY-UyQY';
-mixTape.ENkey = 'UFGYPYEHNZHWIKORQ';
+mixtape.YTkey = 'AIzaSyC-9taR1ub2rdbKEZkpeNYPrGUBXY-UyQY';
+mixtape.ENkey = 'UFGYPYEHNZHWIKORQ';
 
-mixTape.codeAddress = function(){
+mixtape.codeAddress = function(){
 	// reset 
 	origin = null;
 	destination = null;
@@ -50,11 +50,13 @@ mixTape.codeAddress = function(){
 						// if both locations are okay, display map
 						if(destination && origin) {
 							$('section#bottom').css('display','block');
-							mixTape.displayMap();
-							mixTape.showRoute();
+							mixtape.displayMap();
+							mixtape.showRoute();
 							$('input[type="radio"]').attr('checked', false);
 							$("#bottom").get(0).scrollIntoView();
-						} 
+						} else {
+							alert('Broken!');
+						}
 
 					} else {
 						swal({   
@@ -82,7 +84,7 @@ mixTape.codeAddress = function(){
 };
 
 // creates and displays map
-mixTape.displayMap = function(){
+mixtape.displayMap = function(){
 
 	// center of the map (calculates mean value between two locations)
 	latlng = new google.maps.LatLng((origin.lat()+destination.lat())/2,(origin.lng()+destination.lng())/2);
@@ -119,7 +121,6 @@ mixTape.displayMap = function(){
 	};
 
 	directionsService.route(request,function(response, status){
-
 		if(status == google.maps.DirectionsStatus.OK) {
 			directionsDisplay.setDirections(response);
 
@@ -134,19 +135,30 @@ mixTape.displayMap = function(){
 			drivingTimeValue = drivingTimeValue / 60;
 			var drivingTimeRounded = Math.round(drivingTimeValue);
 
-			console.log(drivingTimeRounded);
+			// console.log(drivingTimeRounded);
 
 			$('.from').text(orgAddress);
 			$('.to').text(destAddress);
 			$('.distance').text(distance);
 			$('.duration').text(drivingTime);
 
-			mixTape.estimateNumberSongs(drivingTimeRounded);
+			mixtape.estimateNumberSongs(drivingTimeRounded);
+		} else {
+			swal({   
+				title: "Error!",
+				text: "No route found. Try again.",
+				type: "error",
+				confirmButtonText: "Got it!"
+			}, function(){
+				location.reload();
+				$(window).scrollTop(0);
+			});
+
 		}
 	});
 };
 
-mixTape.showRoute = function(){
+mixtape.showRoute = function(){
 
 	// show route between origin and destination
 	var route = new google.maps.Polyline({
@@ -197,7 +209,7 @@ mixTape.showRoute = function(){
 
 };
 
-mixTape.getMusicGenre = function(){
+mixtape.getMusicGenre = function(){
 
 	$('input[type="radio"]').on('click', function(){
 	// when button is clicked, store the genre in a variable
@@ -209,7 +221,7 @@ mixTape.getMusicGenre = function(){
 };
 
 // get number of songs
-mixTape.estimateNumberSongs = function(drivingtime){
+mixtape.estimateNumberSongs = function(drivingtime){
 	
 	var numberOfSongs;
 
@@ -227,19 +239,19 @@ mixTape.estimateNumberSongs = function(drivingtime){
 		numberOfSongs = 250;
 	}
 
-	mixTape.createPlaylist(numberOfSongs);
+	mixtape.createPlaylist(numberOfSongs);
 };
 
-mixTape.createPlaylist = function(numberOfSongs){
+mixtape.createPlaylist = function(numberOfSongs){
 
 	$.ajax({
-		url: 'http://developer.echonest.com/api/v4/playlist/basic?api_key='+mixTape.ENkey+'&genre='+genre+'&format=json&results='+numberOfSongs+'&type=genre-radio',
+		url: 'http://developer.echonest.com/api/v4/playlist/basic?api_key='+mixtape.ENkey+'&genre='+genre+'&format=json&results='+numberOfSongs+'&type=genre-radio',
 
 		type: 'GET',
 		dataType: 'json',
 		success: function(result){
 			// console.log(result);
-			mixTape.songs = result.response.songs;
+			mixtape.songs = result.response.songs;
 
 			$.each(result.response.songs,function(i,song){
 				var a = $('<a>').text(song.title + ' by ' + song.artist_name);
@@ -247,7 +259,7 @@ mixTape.createPlaylist = function(numberOfSongs){
 
 				$('.playlist ol').append(li);
 
-				mixTape.getVideoId(song.title + song.artist_name, li);
+				mixtape.getVideoId(song.title + song.artist_name, li);
 
 			});
 		},
@@ -258,7 +270,7 @@ mixTape.createPlaylist = function(numberOfSongs){
 };
 
 // get video ID to pass into youtube URL
-mixTape.getVideoId = function(songName, li){
+mixtape.getVideoId = function(songName, li){
 
 	$.ajax({
 		url: "https://www.googleapis.com/youtube/v3/search",
@@ -268,7 +280,7 @@ mixTape.getVideoId = function(songName, li){
 			q: songName,
 			type: "video",
 			maxResults: 1,
-			key: mixTape.YTkey
+			key: mixtape.YTkey
 		},
 		success: function(result){
 			if(!result.items[0]) {
@@ -292,9 +304,9 @@ mixTape.getVideoId = function(songName, li){
 	});
 };
 
-mixTape.init = function(){
+mixtape.init = function(){
 
-	var getMusic = mixTape.getMusicGenre();
+	var getMusic = mixtape.getMusicGenre();
 
 	$('input[type="button"]').on('click', function(e){
 		e.preventDefault();
@@ -308,7 +320,7 @@ mixTape.init = function(){
 			});
 		} else {
 			$('.playlist ol').empty();
-			mixTape.codeAddress();
+			mixtape.codeAddress();
 		}
 	});
 
@@ -319,5 +331,5 @@ mixTape.init = function(){
 };
 
 $(function(){
-	mixTape.init();
+	mixtape.init();
 });
