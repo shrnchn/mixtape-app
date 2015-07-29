@@ -66,7 +66,7 @@ form {
             }
         }
     }
-    input[type="button"] {
+    input[type="button"].go {
         width: 125px;
         background: none;
         padding: 10px;
@@ -82,12 +82,12 @@ form {
 }
 
 .genre {
-    margin: 20px auto 50px auto;
+    margin: 30px auto 60px auto;
     label {
-        width: 100px;
-        height: 100px;
+        width: 90px;
+        height: 90px;
         margin: 5px;
-        border-radius: 50px;
+        border-radius: 45px;
         border: 2px solid white;
         font-weight: $normal;
         transition: all .15s ease-in-out;
@@ -109,7 +109,7 @@ form {
         font-size: 1rem;
         padding: 0;
         display: block;
-        line-height: 100px;
+        line-height: 90px;
     }
     input:checked + span {
         font-weight: $extrabold;
@@ -118,7 +118,7 @@ form {
 }
 
 section {
-    margin: 0 auto 100px auto;
+    margin: 0 auto 80px auto;
     &#bottom {
         display: none;
         text-align: left;
@@ -168,7 +168,7 @@ section {
 }
 
 .playlist {
-    height: 490px;
+    height: 480px;
     overflow-y: auto;
     margin: 40px auto;
     ol {
@@ -206,7 +206,7 @@ section {
 }
 
 footer {
-    margin: 40px auto;
+    margin: 20px auto 30px auto;
     font-size: 0.75rem;
 
     .share {
