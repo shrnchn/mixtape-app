@@ -93,12 +93,18 @@ mixtape.displayMap = function(){
 	// map styles
 	var mapStyle = [{"featureType":"administrative","elementType":"labels.text.fill","stylers":[{"color":"#444444"}]},{"featureType":"landscape","elementType":"all","stylers":[{"color":"#f2f2f2"}]},{"featureType":"poi","elementType":"all","stylers":[{"visibility":"off"}]},{"featureType":"road","elementType":"all","stylers":[{"saturation":-100},{"lightness":45}]},{"featureType":"road.highway","elementType":"all","stylers":[{"visibility":"simplified"}]},{"featureType":"road.arterial","elementType":"labels.icon","stylers":[{"visibility":"off"}]},{"featureType":"transit","elementType":"all","stylers":[{"visibility":"off"}]},{"featureType":"water","elementType":"all","stylers":[{"color":"#46bcec"},{"visibility":"on"}]}];
 
+	var windowSize = Math.max(document.documentElement.clientWidth, window.innerWidth || 0);
+
+	// if window size is greater than 480px, allow draggable
+	var isDraggable = windowSize > 480 ? true : false;
+
 	// set map options
 	var mapOptions = {
 		zoom: 1,
 		center: latlng,
 		styles: mapStyle,
-		scrollwheel: false
+		scrollwheel: false,
+		draggable: isDraggable
 	};
 
 	// creates map object, set map into div
@@ -146,12 +152,13 @@ mixtape.displayMap = function(){
 		} else {
 			swal({   
 				title: "Error!",
-				text: "This is not a drivable route, please try again.",
+				text: "This route may not be drivable or the location needs to be more specific. Please try again.",
 				type: "error",
 				confirmButtonText: "Got it!"
 			}, function(){
+				// reload window at top
 				location.reload();
-				$(window).scrollTop(0);
+				window.onbeforeunload = function(){ window.scrollTo(0,0); }
 			});
 
 		}
@@ -325,8 +332,9 @@ mixtape.init = function(){
 	});
 
 	$('#reset').on('click', function() {
+	    // reload window at top
 	    location.reload();
-	    $(window).scrollTop(0);
+	    window.onbeforeunload = function(){ window.scrollTo(0,0); }
 	});
 };
 

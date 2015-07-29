@@ -2,8 +2,18 @@
 <html lang="en">
 	<head>
 		<meta charset="UTF-8">
-		<title>Road Trip Mixtape App by Sharon Chan</title>
-		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta name="viewport" content="width=device-width,height=device-height,user-scalable=no,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0">
+		<meta name="description" content="Generate a mixtape playlist">
+		<meta name="keywords" content="api, javascript, side project, javascript project, api project, jquery, web development, front end development">
+		<meta name="author" content="Sharon Chan">
+		<meta property="og:site_name" content="Road Trip Mixtape App">
+		<meta property="og:title" content="Road Trip Mixtape App">
+		<meta property="og:description" content="Generate a mixtape playlist">
+		<meta property="og:image" content="http://www.sharonchan.ca/mixtape/facebook.jpg">
+		<meta property="og:url" content="http://www.sharonchan.ca/mixtape">
+		<meta property="og:type" content="website">
+		<title>Road Trip Mixtape App</title>
+		<link type="image/png" href="favicon.ico" rel="icon">
 		<link rel="stylesheet" href="build/css/sweetalert.css">
 		<link rel="stylesheet" href="build/css/styles.min.css">
 	</head>
@@ -12,11 +22,11 @@
 			<section id="top" class="clearfix">
 				<div class="row">
 					<div class="col-md-12">
-						<h1 class="heading">Road Trip Mixtape</h1>
+						<h1 class="heading animated fadeInDown">Road Trip Mixtape</h1>
 					</div>
 				</div>
 						
-				<form id="routes" class="form-inline">
+				<form id="routes" class="form-inline animated fadeIn">
 					<div class="row">
 						<div class="col-md-1"></div>
 						<div class="col-md-10">
@@ -43,10 +53,6 @@
 								<input type="radio" name="toggle" id="country" data-genre="country">
 								<span>Country</span>
 							</label>
-							<label for="dance-pop">
-								<input type="radio" name="toggle" id="dance-pop" data-genre="dance pop">
-								<span>Dance pop</span>
-							</label>
 							<label for="folk">
 								<input type="radio" name="toggle" id="folk" data-genre="folk">
 								<span>Folk</span>
@@ -54,6 +60,10 @@
 							<label for="hip-hop">
 								<input type="radio" name="toggle" id="hip-hop" data-genre="hip hop">
 								<span>Hip hop</span>
+							</label>
+							<label for="indie-pop">
+								<input type="radio" name="toggle" id="indie-pop" data-genre="indie pop">
+								<span>Indie pop</span>
 							</label>
 							<label for="k-pop">
 								<input type="radio" name="toggle" id="k-pop" data-genre="k-pop">
@@ -114,10 +124,25 @@
 
 			<footer class="row">
 				<div class="col-md-12">
-					Made with <span class="glyphicon glyphicon-heart"></span> by <a href="http://www.sharonchan.ca">Sharon Chan</a>
+					<div class="share">
+						<div><a href="https://twitter.com/share" class="twitter-share-button" data-url="http://www.sharonchan.ca/mixtape" data-text="Generate a mixtape playlist using the Road Trip Mixtape App!" data-via="shrnchn">Tweet</a></div>
+						<div class="fb-like" data-href="https://www.sharonchan.ca/mixtape" data-layout="button_count" data-action="like" data-show-faces="false" data-share="true"></div>
+					</div>
+					<div>
+						Made with <span class="glyphicon glyphicon-heart"></span> by <a href="http://www.sharonchan.ca">Sharon Chan</a>
+					</div>
 				</div>
 			</footer>
 		</div>
+	<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+	<div id="fb-root"></div>
+	<script>(function(d, s, id) {
+	  var js, fjs = d.getElementsByTagName(s)[0];
+	  if (d.getElementById(id)) return;
+	  js = d.createElement(s); js.id = id;
+	  js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.4";
+	  fjs.parentNode.insertBefore(js, fjs);
+	}(document, 'script', 'facebook-jssdk'));</script>
 	<script src="http://maps.googleapis.com/maps/api/js?sensor=false"></script>
 	<script src="build/js/scripts.min.js"></script>
 </body>

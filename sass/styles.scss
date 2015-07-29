@@ -1,6 +1,7 @@
 @import "bootstrap";
 @import "core";
 @import "normalize";
+@import "animate";
 
 a {
     color: white;
@@ -207,6 +208,14 @@ section {
 footer {
     margin: 40px auto;
     font-size: 0.75rem;
+
+    .share {
+    	margin: 10px auto;
+    }
+
+    div {
+    	margin: 2px auto;
+    }
 }
 
 @media(max-width: 480px) {
